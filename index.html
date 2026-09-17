@@ -3,476 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجري الإلكتروني الشامل</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>متجر M-Turbo</title>
     <style>
-        :root {
-            --primary-color: #1a365d;
-            --accent-color: #d69e2e;
-            --bg-color: #f7fafc;
-            --card-bg: #ffffff;
-            --text-color: #2d3748;
-            --border-radius: 12px;
-        }
-
-        * {
-            box-sizing: border-box;
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Tajawal', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding-bottom: 60px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
-            color: white;
-            padding: 20px 0;
+            background-color: #f4f4f9;
+            color: #333;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
+        header {
+            background-color: #111;
             color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding: 20px;
         }
-
-        .logo i {
-            color: var(--accent-color);
-        }
-
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-            font-size: 22px;
-            background: rgba(255,255,255,0.1);
-            padding: 10px 15px;
-            border-radius: 20px;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            background-color: #e53e3e;
+        .offers-banner {
+            background-color: #ff4757;
             color: white;
-            border-radius: 50%;
-            padding: 2px 8px;
-            font-size: 12px;
+            padding: 10px;
             font-weight: bold;
         }
-
         .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+            padding: 20px;
         }
-
-        .section-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin: 40px 0 20px 0;
-            border-right: 4px solid var(--accent-color);
-            padding-right: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
-
         .product-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            background-color: #edf2f7;
-        }
-
-        .product-info {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .product-price {
-            font-size: 18px;
-            color: var(--primary-color);
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .add-btn {
-            width: 100%;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .add-btn:hover {
-            background-color: #2b6cb0;
-        }
-
-        /* Cart Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
             background: white;
-            width: 90%;
-            max-width: 500px;
-            border-radius: var(--border-radius);
-            padding: 25px;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 10px;
-        }
-
-        .close-btn {
-            font-size: 20px;
-            cursor: pointer;
-            color: #718096;
-        }
-
-        .payment-methods {
-            margin: 20px 0;
-        }
-
-        .payment-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #cbd5e0;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .payment-option input {
-            cursor: pointer;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            background-color: #38a169;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .checkout-btn:hover {
-            background-color: #2f855a;
+            padding: 15px;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fa-solid fa-store"></i> متجري الشامل
-            </div>
-            <div class="cart-icon" onclick="toggleCart()">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="cart-count" id="cartCount">0</span>
-            </div>
-        </div>
+        <h1>متجر M-Turbo</h1>
     </header>
 
+    <div class="offers-banner">
+        🔥 عروض خاصة لفترة محدودة! خصومات تصل إلى 30% 🔥
+    </div>
+
     <div class="container">
-
-        <!-- قسم اللابتوبات والأجهزة -->
-        <div class="section-title"><i class="fa-solid fa-laptop"></i> اللابتوبات والأجهزة الإلكترونية</div>
+        <h2>المنتجات</h2>
         <div class="products-grid">
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" class="product-img" alt="لابتوب ماك بوك">
-                <div class="product-info">
-                    <div class="product-title">لابتوب ماك بوك برو M2</div>
-                    <div class="product-price">4,999 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('لابتوب ماك بوك برو M2', 4999)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
+                <h3>منتج 1</h3>
+                <p>وصف المنتج هنا</p>
+                <span>السعر: $10</span>
             </div>
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500" class="product-img" alt="لابتوب جيمنج">
-                <div class="product-info">
-                    <div class="product-title">لابتوب ألعاب ASUS ROG</div>
-                    <div class="product-price">5,499 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('لابتوب ألعاب ASUS ROG', 5499)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
+                <h3>منتج 2</h3>
+                <p>وصف المنتج هنا</p>
+                <span>السعر: $15</span>
             </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500" class="product-img" alt="آيباد برو">
-                <div class="product-info">
-                    <div class="product-title">آيباد برو 12.9 بوصة</div>
-                    <div class="product-price">3,899 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('آيباد برو 12.9 بوصة', 3899)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- قسم الألعاب والملحقات -->
-        <div class="section-title"><i class="fa-solid fa-gamepad"></i> الألعاب والملحقات</div>
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500" class="product-img" alt="بلايستيشن 5">
-                <div class="product-info">
-                    <div class="product-title">جهاز بلايستيشن 5</div>
-                    <div class="product-price">2,299 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('جهاز بلايستيشن 5', 2299)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=500" class="product-img" alt="يد تحكم">
-                <div class="product-info">
-                    <div class="product-title">يد تحكم بلايستيشن احترافية</div>
-                    <div class="product-price">299 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('يد تحكم احترافية', 299)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500" class="product-img" alt="سماعة جيمنج">
-                <div class="product-info">
-                    <div class="product-title">سماعة محيطية للألعاب</div>
-                    <div class="product-price">349 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('سماعة محيطية للألعاب', 349)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- قسم الملابس الرجالية -->
-        <div class="section-title"><i class="fa-solid fa-shirt"></i> الملابس والأزياء</div>
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=500" class="product-img" alt="شخص يرتدي ثوب">
-                <div class="product-info">
-                    <div class="product-title">ثوب رجالي أبيض فاخر</div>
-                    <div class="product-price">250 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('ثوب رجالي أبيض فاخر', 250)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=500" class="product-img" alt="شماغ حمراء">
-                <div class="product-info">
-                    <div class="product-title">شماغ أحمر كلاسيك</div>
-                    <div class="product-price">180 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('شماغ أحمر كلاسيك', 180)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" class="product-img" alt="تيشرت قطن">
-                <div class="product-info">
-                    <div class="product-title">تيشرت قطني كاجوال</div>
-                    <div class="product-price">85 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('تيشرت قطني كاجوال', 85)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500" class="product-img" alt="تيشرت أسود">
-                <div class="product-info">
-                    <div class="product-title">تيشرت أسود أوفرسايز</div>
-                    <div class="product-price">110 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('تيشرت أسود أوفرسايز', 110)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- قسم العطور -->
-        <div class="section-title"><i class="fa-solid fa-spray-can"></i> العطور والروائح</div>
-        <div class="products-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500" class="product-img" alt="عطر رجالي">
-                <div class="product-info">
-                    <div class="product-title">عطر العود والمسك</div>
-                    <div class="product-price">320 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('عطر العود والمسك', 320)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500" class="product-img" alt="زجاجة عطر فاخرة">
-                <div class="product-info">
-                    <div class="product-title">عطر خشبي كلاسيكي</div>
-                    <div class="product-price">280 ر.س</div>
-                    <button class="add-btn" onclick="addToCart('عطر خشبي كلاسيكي', 280)"><i class="fa-solid fa-plus"></i> إضافة للسلة</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- نافذة السلة والتدقيق -->
-    <div class="modal" id="cartModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-cart-shopping"></i> سلة الشراء</h3>
-                <span class="close-btn" onclick="toggleCart()">&times;</span>
-            </div>
-            <div id="cartItems">
-                <!-- سيتم ملؤه بواسطة JS -->
-            </div>
-            <hr style="margin: 15px 0;">
-            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px;">
-                <span>المجموع:</span>
-                <span id="cartTotal">0 ر.س</span>
-            </div>
-
-            <!-- وسائل الدفع -->
-            <div class="payment-methods">
-                <h4>طريقة الدفع:</h4>
-                <label class="payment-option">
-                    <input type="radio" name="payment" value="cod" checked>
-                    <i class="fa-solid fa-truck-rambal"></i> الدفع عند الاستلام
-                </label>
-                <label class="payment-option">
-                    <input type="radio" name="payment" value="card">
-                    <i class="fa-solid fa-credit-card"></i> الدفع عبر البطاقة (مدى / فيزا)
-                </label>
-            </div>
-
-            <button class="checkout-btn" onclick="checkout()">إتمام الطلب</button>
         </div>
     </div>
 
-    <script>
-        let cart = [];
-
-        function addToCart(name, price) {
-            cart.push({name, price});
-            updateCart();
-            alert(`تمت إضافة "${name}" إلى السلة!`);
-        }
-
-        function updateCart() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            cartItems.innerHTML = '';
-            let total = 0;
-
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p style="text-align: center; color: #a0aec0;">السلة فارغة حالياً</p>';
-            } else {
-                cart.forEach((item, index) => {
-                    total += item.price;
-                    cartItems.innerHTML += `
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <span>${item.name}</span>
-                            <div>
-                                <span>${item.price} ر.س</span>
-                                <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #e53e3e; margin-right: 10px; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-
-            cartTotal.innerText = `${total} ر.س`;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function toggleCart() {
-            const modal = document.getElementById('cartModal');
-            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert('السلة فارغة!');
-                return;
-            }
-            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-            const methodText = paymentMethod === 'cod' ? 'الدفع عند الاستلام' : 'الدفع عبر البطاقة';
-            
-            alert(`تم استلام طلبك بنجاح!\nطريقة الدفع: ${methodText}\nشكراً لتسوقك معنا.`);
-            cart = [];
-            updateCart();
-            toggleCart();
-        }
-    </script>
 </body>
 </html>
