@@ -7,6 +7,49 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
         body { background-color: #f0f7f4; color: #333; padding-bottom: 80px; }
+        
+        /* انيميشن وشاشة الترحيب */
+        .welcome-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #004d25;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 0.8s ease 4.5s forwards;
+        }
+        .welcome-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
+        .national-anim {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #f1c40f;
+            border-right: 3px solid #f1c40f;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 2s steps(20) 1.5s forwards;
+        }
+        .saudi-flag-anim {
+            font-size: 4rem;
+            margin-top: 15px;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: popUp 1s ease 3.5s forwards;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes typing { to { width: 280px; } }
+        @keyframes popUp { to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
         .promo-banner { background: #006c35; color: #fff; text-align: center; padding: 12px; font-weight: bold; font-size: 1.1rem; border-bottom: 3px solid #f1c40f; }
         header { background: #004d25; color: #fff; text-align: center; padding: 30px 10px; border-bottom: 4px solid #006c35; }
         header h1 { color: #ffffff; margin-bottom: 8px; font-size: 2.2rem; }
@@ -41,6 +84,14 @@
     </style>
 </head>
 <body>
+
+    <!-- شاشة الترحيب والانيميشن -->
+    <div class="welcome-overlay">
+        <div class="welcome-title">مرحباً بك في شوبينج مود</div>
+        <div class="national-anim">عروض اليوم الوطني</div>
+        <div class="saudi-flag-anim">🇸🇦</div>
+    </div>
+
     <div class="promo-banner">🇸🇦 عروض وباقات اليوم الوطني الـ 96 - شحن سريع لجميع المدن! 🇸🇦</div>
     <header>
         <h1>شوبنق مود | Shopping Mode 🇸🇦</h1>
@@ -53,14 +104,22 @@
         <a href="#perfumes">✨ العطور الفاخرة</a>
         <a href="#saudi-style">👔 الثياب والأشمغة</a>
         <a href="#vr">أجهزة VR</a>
-        <a href="#electronics">الإلكترونيات</a>
-        <a href="#toys">الألعاب</a>
+        <a href="#electronics">الإلكترونيات واللابتوبات</a>
     </nav>
     <div class="container">
 
         <!-- قسم عروض اليوم الوطني 96 -->
         <h2 id="bundles" class="section-title">💥 باقات وعروض اليوم الوطني 96</h2>
         <div class="products-grid">
+            <div class="card">
+                <span class="badge">عرض خاص 🔥</span>
+                <span class="badge-nd">اليوم الوطني 96</span>
+                <img src="IMG_9a9ecd9d-cf2c-4555-bbf6-21c8e68d25d9.jpg" alt="ثوبين وشماغ مجاناً">
+                <h3>عرض خاص (خذ ثوبين وشماغ مجاناً)</h3>
+                <p class="desc">اشترِ ثوبين من اختيارك واحصل على شماغ أحمر فاخر مجاناً!</p>
+                <div class="price">392 ر.س <small style="text-decoration:line-through; color:#888; font-size:0.85rem;">488 ر.س</small></div>
+                <button class="btn-add" onclick="addToCart('عرض خذ ثوبين وشماغ مجاناً', 392, 'saudi')">إضافة العرض للسلة 🛒</button>
+            </div>
             <div class="card">
                 <span class="badge">وفر أكتر 🔥</span>
                 <span class="badge-nd">اليوم الوطني 96</span>
@@ -117,9 +176,17 @@
             </div>
         </div>
 
-        <!-- قسم الزي السعودي -->
-        <h2 id="saudi-style" class="section-title">👔 الزي السعودي الأنيق</h2>
+        <!-- قسم الزي السعودي والملابس -->
+        <h2 id="saudi-style" class="section-title">👔 الزي السعودي والملابس الأنيقة</h2>
         <div class="products-grid">
+            <div class="card">
+                <span class="badge">جديد 🌟</span>
+                <img src="IMG_20260922_212856.jpg" alt="تيشيرت مميز">
+                <h3>تيشيرت مناسب لك انت وصديقك</h3>
+                <p class="desc">تصميم عصري وجذاب ومناسب للإهداء لك ولصديقك المقرب</p>
+                <div class="price">120 ر.س</div>
+                <button class="btn-add" onclick="addToCart('تيشيرت مناسب لك ولصديقك', 120, 'saudi')">اشتر الان 🛒</button>
+            </div>
             <div class="card">
                 <img src="IMG_9a9ecd9d-cf2c-4555-bbf6-21c8e68d25d9.jpg" alt="ثوب سعودي أبيض">
                 <h3>ثوب سعودي فاخر (أبيض)</h3>
@@ -156,9 +223,17 @@
             </div>
         </div>
 
-        <!-- قسم الألعاب والإلكترونيات -->
-        <h2 id="electronics" class="section-title">📱 الإلكترونيات والألعاب</h2>
+        <!-- قسم الألعاب والإلكترونيات واللابتوبات -->
+        <h2 id="electronics" class="section-title">📱 الإلكترونيات واللابتوبات والالعاب</h2>
         <div class="products-grid">
+            <div class="card">
+                <span class="badge">الأكثر طلباً 💻</span>
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="لابتوب احترافي">
+                <h3>لابتوب المحترفين (Laptop Pro)</h3>
+                <p class="desc">أداء عالي وسريع للعمل والدراسة والألعاب بأحدث المواصفات</p>
+                <div class="price">2,999 ر.س</div>
+                <button class="btn-add" onclick="addToCart('لابتوب المحترفين Pro', 2999, 'usa')">إضافة للسلة 🛒</button>
+            </div>
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="باي فون 17">
                 <h3>جوال باي فون 17 (PayPhone 17)</h3>
@@ -223,4 +298,5 @@
         function closeModal() { document.getElementById('checkout-modal').style.display = 'none'; cart = []; updateCartUI(); }
     </script>
 </body>
-</html>
+                    </html>
+
