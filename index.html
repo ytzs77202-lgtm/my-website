@@ -1,61 +1,227 @@
-<!-- أزرار التواصل -->
-<div class="contact-buttons">
-    <a href="tel:0550140855" class="contact-btn call-btn">
-        📞 اتصال
-    </a>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شوبنق مود - عروض اليوم الوطني 96 🇸🇦</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: #f0f7f4; color: #333; padding-bottom: 80px; }
+        .promo-banner { background: #006c35; color: #fff; text-align: center; padding: 12px; font-weight: bold; font-size: 1.1rem; border-bottom: 3px solid #f1c40f; }
+        header { background: #004d25; color: #fff; text-align: center; padding: 30px 10px; border-bottom: 4px solid #006c35; }
+        header h1 { color: #ffffff; margin-bottom: 8px; font-size: 2.2rem; }
+        .saudi-tag { background: #f1c40f; color: #004d25; padding: 5px 15px; border-radius: 20px; font-size: 0.95rem; font-weight: bold; display: inline-block; margin-top: 8px; }
+        nav { background: #003318; display: flex; justify-content: center; gap: 15px; padding: 12px; flex-wrap: wrap; }
+        nav a { color: #fff; text-decoration: none; font-weight: bold; font-size: 0.95rem; }
+        nav a:hover { color: #f1c40f; }
+        .container { padding: 20px; max-width: 1100px; margin: auto; }
+        .section-title { margin: 30px 0 15px 0; color: #004d25; border-bottom: 3px solid #006c35; padding-bottom: 8px; font-size: 1.4rem; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+        .card { background: #fff; border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: transform 0.2s; display: flex; flex-direction: column; justify-content: space-between; position: relative; border: 1px solid #e2ece9; }
+        .card:hover { transform: translateY(-4px); }
+        .card .badge { position: absolute; top: 10px; right: 10px; background: #e94560; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; }
+        .card .badge-nd { position: absolute; top: 10px; left: 10px; background: #006c35; color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; }
+        .card img { width: 100%; height: 190px; object-fit: cover; border-radius: 8px; background-color: #f9f9f9; }
+        .card h3 { margin: 12px 0 6px 0; font-size: 1.1rem; color: #111; }
+        .card p.desc { font-size: 0.85rem; color: #666; margin-bottom: 8px; line-height: 1.4; }
+        .card .price { color: #006c35; font-weight: bold; font-size: 1.2rem; margin-bottom: 12px; }
+        .btn-add { background: #006c35; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.2s; }
+        .btn-add:hover { background: #004d25; }
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #003318; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); z-index: 1000; }
+        .cart-bar .cart-info { font-size: 1.1rem; font-weight: bold; }
+        .cart-bar .checkout-btn { background: #f1c40f; color: #003318; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+        .cart-bar .checkout-btn:hover { background: #e1b40f; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000; }
+        .modal-content { background: white; padding: 25px; border-radius: 12px; max-width: 450px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-content h2 { color: #006c35; margin-bottom: 10px; }
+        .modal-content p { font-size: 1.05rem; margin: 10px 0; color: #444; line-height: 1.5; }
+        .modal-content .shipping-time { background: #f0fff4; border: 1px solid #006c35; padding: 12px; border-radius: 8px; font-weight: bold; color: #006c35; margin: 15px 0; }
+        .modal-content button { background: #004d25; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        footer { text-align: center; padding: 20px; background: #003318; color: #fff; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <div class="promo-banner">🇸🇦 عروض وباقات اليوم الوطني الـ 96 - شحن سريع لجميع المدن! 🇸🇦</div>
+    <header>
+        <h1>شوبنق مود | Shopping Mode 🇸🇦</h1>
+        <p>عروض حصرية بمناسبة اليوم الوطني الـ 96 - خصومات على العطور والأزياء والإلكترونيات</p>
+        <span class="saudi-tag">خصومات وعروض مجمعة لفترة محدودة 🇸🇦</span>
+    </header>
+    <nav>
+        <a href="#">الرئيسية</a>
+        <a href="#bundles">💥 باقات اليوم الوطني</a>
+        <a href="#perfumes">✨ العطور الفاخرة</a>
+        <a href="#saudi-style">👔 الثياب والأشمغة</a>
+        <a href="#vr">أجهزة VR</a>
+        <a href="#electronics">الإلكترونيات</a>
+        <a href="#toys">الألعاب</a>
+    </nav>
+    <div class="container">
 
-    <a href="https://wa.me/966550140855" target="_blank" class="contact-btn whatsapp-btn">
-        💬 واتساب
-    </a>
-</div>
+        <!-- قسم عروض اليوم الوطني 96 -->
+        <h2 id="bundles" class="section-title">💥 باقات وعروض اليوم الوطني 96</h2>
+        <div class="products-grid">
+            <div class="card">
+                <span class="badge">وفر أكتر 🔥</span>
+                <span class="badge-nd">اليوم الوطني 96</span>
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=400&q=80" alt="عرض تيشيرت وملصقات">
+                <h3>باقة الشباب (تيشيرت بديدس + ملصقات)</h3>
+                <p class="desc">تيشيرت بديدس رياضي خفيف + حزمة ملصقات متنوعة بخصم خاص</p>
+                <div class="price">49 ر.س <small style="text-decoration:line-through; color:#888; font-size:0.85rem;">55 ر.س</small></div>
+                <button class="btn-add" onclick="addToCart('باقة تيشيرت + ملصقات', 49, 'saudi')">إضافة العرض للسلة 🛒</button>
+            </div>
+            <div class="card">
+                <span class="badge">العرض الفاخر ⭐</span>
+                <span class="badge-nd">اليوم الوطني 96</span>
+                <img src="IMG_9a9ecd9d-cf2c-4555-bbf6-21c8e68d25d9.jpg" alt="ثوب وشماغ">
+                <h3>باقة الأناقة (ثوب سعودي + شماغ أحمر)</h3>
+                <p class="desc">ثوب سعودي فاخر (أبيض أو كحلي) مع شماغ أحمر ملكي قطن 100%</p>
+                <div class="price">269 ر.س <small style="text-decoration:line-through; color:#888; font-size:0.85rem;">292 ر.س</small></div>
+                <button class="btn-add" onclick="addToCart('باقة ثوب + شماغ', 269, 'saudi')">إضافة العرض للسلة 🛒</button>
+            </div>
+            <div class="card">
+                <span class="badge">عرض العطور ✨</span>
+                <span class="badge-nd">اليوم الوطني 96</span>
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=400&q=80" alt="عرض العطور">
+                <h3>ثنائية العطور (عود ملكي + مسك أبيض)</h3>
+                <p class="desc">عبوتين من أفضل العطور ثباتاً وفخامة ليومك المناسبات واليومي</p>
+                <div class="price">249 ر.س <small style="text-decoration:line-through; color:#888; font-size:0.85rem;">292 ر.س</small></div>
+                <button class="btn-add" onclick="addToCart('ثنائية العطور الفاخرة', 249, 'saudi')">إضافة العرض للسلة 🛒</button>
+            </div>
+        </div>
 
-<style>
-    .contact-buttons {
-        position: fixed;
-        bottom: 75px;
-        right: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        z-index: 1500;
-    }
+        <!-- قسم العطور -->
+        <h2 id="perfumes" class="section-title">✨ قسم العطور الفاخرة</h2>
+        <div class="products-grid">
+            <div class="card">
+                <span class="badge">الأكثر مبيعاً 🔥</span>
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=400&q=80" alt="عطر العود الملكي">
+                <h3>عطر العود الملكي (Royal Oud)</h3>
+                <p class="desc">رائحة العود الفاخر والمبخر بلمسة شرقية وثبات يدوم طويلاً</p>
+                <div class="price">196 ر.س</div>
+                <button class="btn-add" onclick="addToCart('عطر العود الملكي', 196, 'saudi')">إضافة للسلة 🛒</button>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=400&q=80" alt="عطر المسك الأبيض">
+                <h3>عطر المسك الأبيض (White Musk)</h3>
+                <p class="desc">رائحة النظافة والانتعاش اليومي الهادئة</p>
+                <div class="price">96 ر.س</div>
+                <button class="btn-add" onclick="addToCart('عطر المسك الأبيض', 96, 'saudi')">إضافة للسلة 🛒</button>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=400&q=80" alt="عطر الورد الطائفي">
+                <h3>عطر الورد الطائفي الاصيل</h3>
+                <p class="desc">تقطير الورد الطائفي الفاخر برائحة زكية وجذابة</p>
+                <div class="price">150 ر.س</div>
+                <button class="btn-add" onclick="addToCart('عطر الورد الطائفي', 150, 'saudi')">إضافة للسلة 🛒</button>
+            </div>
+        </div>
 
-    .contact-btn {
-        text-decoration: none;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 30px;
-        font-weight: bold;
-        font-size: 1rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        text-align: center;
-        min-width: 130px;
-        transition: transform 0.2s, opacity 0.2s;
-    }
+        <!-- قسم الزي السعودي -->
+        <h2 id="saudi-style" class="section-title">👔 الزي السعودي الأنيق</h2>
+        <div class="products-grid">
+            <div class="card">
+                <img src="IMG_9a9ecd9d-cf2c-4555-bbf6-21c8e68d25d9.jpg" alt="ثوب سعودي أبيض">
+                <h3>ثوب سعودي فاخر (أبيض)</h3>
+                <p class="desc">ثوب سعودي أصيل باللون الأبيض الناصع بقماش فاخر</p>
+                <div class="price">196 ر.س</div>
+                <button class="btn-add" onclick="addToCart('ثوب سعودي أبيض', 196, 'saudi')">إضافة للسلة 🛒</button>
+            </div>
+            <div class="card">
+                <img src="IMG_c8ed7056-9a76-4145-a0f4-6c56817ea8bc.jpg" alt="ثوب سعودي كحلي">
+                <h3>ثوب سعودي فخم (كحلي)</h3>
+                <p class="desc">ثوب كحلي أنيق بتصميم عصري وخياطة راقية</p>
+                <div class="price">196 ر.س</div>
+                <button class="btn-add" onclick="addToCart('ثوب سعودي كحلي', 196, 'saudi')">إضافة للسلة 🛒</button>
+            </div>
+            <div class="card">
+                <img src="IMG_47801a6e-677c-4d2a-8da1-b94894e168ae.jpg" alt="شماغ أحمر ملكي">
+                <h3>شماغ أحمر ملكي</h3>
+                <p class="desc">شماغ أحمر مميز بنقشة ملكية خامة قطن 100%</p>
+                <div class="price">96 ر.س</div>
+                <button class="btn-add" onclick="addToCart('شماغ أحمر ملكي', 96, 'saudi')">إضافة للسلة 🛒</button>
+            </div>
+        </div>
 
-    .contact-btn:hover {
-        transform: scale(1.05);
-        opacity: 0.9;
-    }
+        <!-- قسم الواقع الافتراضي -->
+        <h2 id="vr" class="section-title">🥽 أجهزة الواقع الافتراضي (VR)</h2>
+        <div class="products-grid">
+            <div class="card">
+                <span class="badge">عرض خاص 🔥</span>
+                <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=400&q=80" alt="نظارة ميتا ويست VR">
+                <h3>نظارة ميتا ويست (Meta West VR)</h3>
+                <p class="desc">نظارة واقع افتراضي متطورة بكاميرتين في كل جهة بالعرض</p>
+                <div class="price">1,496 ر.س</div>
+                <button class="btn-add" onclick="addToCart('نظارة ميتا ويست VR', 1496, 'china')">إضافة للسلة 🛒</button>
+            </div>
+        </div>
 
-    .call-btn {
-        background: #006c35;
-    }
+        <!-- قسم الألعاب والإلكترونيات -->
+        <h2 id="electronics" class="section-title">📱 الإلكترونيات والألعاب</h2>
+        <div class="products-grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="باي فون 17">
+                <h3>جوال باي فون 17 (PayPhone 17)</h3>
+                <div class="price">2,499 ر.س</div>
+                <button class="btn-add" onclick="addToCart('باي فون 17', 2499, 'china')">إضافة للسلة 🛒</button>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1532330393533-443990a51d10?auto=format&fit=crop&w=400&q=80" alt="سيارة لعبة ربع بريموت">
+                <h3>سيارة لعبة ربع بريموت تحكم</h3>
+                <div class="price">85 ر.س</div>
+                <button class="btn-add" onclick="addToCart('سيارة ربع ريموت', 85, 'china')">إضافة للسلة 🛒</button>
+            </div>
+        </div>
 
-    .whatsapp-btn {
-        background: #25D366;
-    }
+    </div>
 
-    @media (max-width: 600px) {
-        .contact-buttons {
-            right: 12px;
-            bottom: 80px;
+    <div class="cart-bar">
+        <div class="cart-info">🛒 السلة: <span id="cart-count">0</span> منتج | المجموع: <span id="cart-total">0</span> ر.س</div>
+        <button class="checkout-btn" onclick="checkout()">إتمام الشراء المباشر ⚡</button>
+    </div>
+
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content">
+            <h2>🎉 تم تأكيد طلبك بنجاح!</h2>
+            <p>طريقة الدفع: <b>الدفع المباشر عند الاستلام ⚡</b></p>
+            <div class="shipping-time" id="shipping-time-text">جاري حساب مدة الشحن...</div>
+            <p>شكراً لتسوقك من متجر شوبنق مود 🇸🇦</p>
+            <br>
+            <button onclick="closeModal()">إغلاق</button>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 متجر شوبنق مود - عروض اليوم الوطني 96 🇸🇦</p></footer>
+
+    <script>
+        let cart = [];
+        function addToCart(name, price, origin) { cart.push({ name, price, origin }); updateCartUI(); }
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-total').innerText = total;
         }
-
-        .contact-btn {
-            min-width: 115px;
-            padding: 10px 15px;
-            font-size: 0.9rem;
+        function checkout() {
+            if (cart.length === 0) { alert('السلة فارغة! قم بفرز وإضافة بعض المنتجات أولاً.'); return; }
+            let shippingText = "";
+            if (cart.length >= 5) {
+                shippingText = "📦 طلبية كبيرة متجهة لعنوانك.<br><b>مدة التوصيل المتوقعة: شهر كامل (30 يوماً).</b>";
+            } else {
+                let hasUSA = cart.some(item => item.origin === 'usa');
+                let hasChina = cart.some(item => item.origin === 'china');
+                if (hasUSA && hasChina) {
+                    shippingText = "✈️ شحن دولي مجمع لعنوانك.<br><b>مدة التوصيل المتوقعة: من 8 إلى 14 يوماً.</b>";
+                } else if (hasUSA) {
+                    shippingText = "✈️ الشحن مباشر من أمريكا.<br><b>مدة التوصيل المتوقعة: من 6 إلى 10 أيام.</b>";
+                } else {
+                    shippingText = "🚢 الشحن مباشر وسريع.<br><b>مدة التوصيل المتوقعة: من 3 إلى 5 أيام.</b>";
+                }
+            }
+            document.getElementById('shipping-time-text').innerHTML = shippingText;
+            document.getElementById('checkout-modal').style.display = 'flex';
         }
-    }
-</style>
+        function closeModal() { document.getElementById('checkout-modal').style.display = 'none'; cart = []; updateCartUI(); }
+    </script>
+</body>
+</html>
+
