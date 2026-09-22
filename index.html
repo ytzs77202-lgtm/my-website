@@ -6,7 +6,7 @@
     <title>شوبنق مود - عروض اليوم الوطني 96 🇸🇦</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: #f0f7f4; color: #333; padding-bottom: 80px; }
+        body { background-color: #f0f7f4; color: #333; padding-bottom: 90px; }
         
         /* انيميشن وشاشة الترحيب */
         .welcome-overlay {
@@ -48,7 +48,13 @@
         @keyframes fadeIn { to { opacity: 1; } }
         @keyframes typing { to { width: 280px; } }
         @keyframes popUp { to { opacity: 1; transform: scale(1); } }
-        @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+        @keyframes fadeOut { 
+            to { 
+                opacity: 0; 
+                visibility: hidden; 
+                pointer-events: none; /* تم تعديلها هنا لضمان امكانية الضغط على الأزرار */
+            } 
+        }
 
         .promo-banner { background: #006c35; color: #fff; text-align: center; padding: 12px; font-weight: bold; font-size: 1.1rem; border-bottom: 3px solid #f1c40f; }
         header { background: #004d25; color: #fff; text-align: center; padding: 30px 10px; border-bottom: 4px solid #006c35; }
@@ -74,6 +80,8 @@
         .cart-bar .cart-info { font-size: 1.1rem; font-weight: bold; }
         .cart-bar .checkout-btn { background: #f1c40f; color: #003318; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; }
         .cart-bar .checkout-btn:hover { background: #e1b40f; }
+        
+        /* النافذة المنبثقة للسلة */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000; }
         .modal-content { background: white; padding: 25px; border-radius: 12px; max-width: 450px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
         .modal-content h2 { color: #006c35; margin-bottom: 15px; }
@@ -165,7 +173,7 @@
         <div class="products-grid">
             <div class="card">
                 <span class="badge">وصل حديثاً 🔥</span>
-                <img src="1778166141346.png" alt="وصل خضران">
+                <img id="img-khadran" src="1778166141346.png" alt="وصل خضران">
                 <h3>وصل خضران</h3>
                 <p class="desc">تصميم عصري وجديد كلياً متاح الآن لفترة محدودة</p>
                 <div class="price">130 ر.س</div>
@@ -173,7 +181,7 @@
             </div>
             <div class="card">
                 <span class="badge">جديد 🌟</span>
-                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=400&q=80" alt="تيشيرت مناسب لك انت وصديقك">
+                <img id="img-friend" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=400&q=80" alt="تيشيرت مناسب لك انت وصديقك">
                 <h3>تيشيرت مناسب لك انت وصديقك</h3>
                 <p class="desc">تصميم عصري وجذاب ومناسب للإهداء لك ولصديقك المقرب</p>
                 <div class="price">120 ر.س</div>
@@ -283,28 +291,7 @@
     <!-- نافذة مراجعة السلة والدفع -->
     <div class="modal" id="cart-modal">
         <div class="modal-content" id="cart-modal-body">
-            <h2>🛒 محتويات السلة</h2>
-            <div class="cart-items-list" id="cart-items-container">
-                <!-- المشتريات تظهر هنا -->
-            </div>
-            
-            <div class="payment-options">
-                <p><b>اختر طريقة الدفع:</b></p>
-                <label>
-                    <input type="radio" name="paymentMethod" value="cod" checked onclick="togglePaymentInputs('cod')"> الدفع عند الاستلام 💵
-                </label>
-                <label>
-                    <input type="radio" name="paymentMethod" value="card" onclick="togglePaymentInputs('card')"> البطاقة البنكية 💳
-                </label>
-
-                <div class="card-inputs" id="card-inputs-box">
-                    <input type="text" id="card-number" placeholder="رقم البطاقة (أدخل 9 أرقام)" maxlength="9">
-                    <input type="text" id="card-cvv" placeholder="رمز الأمان CVV (أدخل 4 أرقام)" maxlength="4">
-                </div>
-            </div>
-
-            <button class="btn-action" onclick="processOrder()">إتمام الطلب ⚡</button>
-            <button class="btn-close" onclick="closeCartModal()">إغلاق</button>
+            <!-- المحتوى يتغير ديناميكياً بواسطة JavaScript -->
         </div>
     </div>
 
@@ -324,4 +311,27 @@
             document.getElementById('cart-total').innerText = total;
         }
 
-        function openCartModal(
+        function openCartModal() {
+            if (cart.length === 0) {
+                alert('السلة فارغة! قم بإضافة بعض المنتجات أولاً.');
+                return;
+            }
+            renderCartModal();
+            document.getElementById('cart-modal').style.display = 'flex';
+        }
+
+        function renderCartModal() {
+            let containerHtml = '';
+            cart.forEach((item, index) => {
+                containerHtml += `
+                    <div class="cart-item-row">
+                        <span><b>${index + 1}.</b> ${item.name}</span>
+                        <span><b>${item.price} ر.س</b></span>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cart-modal-body').innerHTML = `
+                <h2>🛒 محتويات السلة</h2>
+                <div class="cart-items-list">
+                    $
