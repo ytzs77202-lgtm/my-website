@@ -6,28 +6,7 @@
     <title>شوبنق مود - عروض اليوم الوطني 96 🇸🇦</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: #f0f7f4; color: #333; padding-bottom: 110px; }
-        
-        /* شاشة الترحيب */
-        .welcome-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #004d25;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeOut 0.8s ease 4s forwards;
-            pointer-events: none;
-        }
-        .welcome-title { font-size: 2rem; margin-bottom: 15px; opacity: 0; animation: fadeIn 1s ease 0.5s forwards; }
-        .welcome-sub { font-size: 1.8rem; font-weight: bold; color: #f1c40f; opacity: 0; animation: fadeIn 1s ease 1.5s forwards; }
-
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-
+        body { background-color: #f0f7f4; color: #333; padding-bottom: 80px; }
         .promo-banner { background: #006c35; color: #fff; text-align: center; padding: 12px; font-weight: bold; font-size: 1.1rem; border-bottom: 3px solid #f1c40f; }
         header { background: #004d25; color: #fff; text-align: center; padding: 30px 10px; border-bottom: 4px solid #006c35; }
         header h1 { color: #ffffff; margin-bottom: 8px; font-size: 2.2rem; }
@@ -48,44 +27,20 @@
         .card .price { color: #006c35; font-weight: bold; font-size: 1.2rem; margin-bottom: 12px; }
         .btn-add { background: #006c35; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.2s; }
         .btn-add:hover { background: #004d25; }
-        
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #003318; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); z-index: 1000; }
         .cart-bar .cart-info { font-size: 1.1rem; font-weight: bold; }
         .cart-bar .checkout-btn { background: #f1c40f; color: #003318; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; }
         .cart-bar .checkout-btn:hover { background: #e1b40f; }
-
-        /* خدمة العملاء العائمة */
-        .support-float { position: fixed; bottom: 65px; left: 15px; z-index: 1001; display: flex; gap: 8px; }
-        .support-btn { background: #25d366; color: white; text-decoration: none; padding: 8px 14px; border-radius: 25px; font-size: 0.85rem; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 5px; }
-        .support-btn.call-btn { background: #006c35; }
-
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000; }
-        .modal-content { background: white; padding: 25px; border-radius: 12px; max-width: 450px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
+        .modal-content { background: white; padding: 25px; border-radius: 12px; max-width: 450px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .modal-content h2 { color: #006c35; margin-bottom: 10px; }
-        .modal-content p { font-size: 1rem; margin: 10px 0; color: #444; line-height: 1.5; }
-        .cart-items-list { text-align: right; background: #f9f9f9; padding: 10px; border-radius: 8px; margin: 15px 0; max-height: 180px; overflow-y: auto; border: 1px solid #ddd; }
-        .cart-item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
-        .payment-section { text-align: right; margin: 15px 0; }
-        .payment-section label { display: block; margin: 8px 0; font-weight: bold; cursor: pointer; }
-        .card-box { background: #f0fff4; padding: 12px; border-radius: 8px; border: 1px solid #006c35; margin-top: 10px; display: none; }
-        .card-box input { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #ccc; border-radius: 6px; text-align: center; font-size: 0.95rem; }
-        .shipping-time { background: #f0fff4; border: 1px solid #006c35; padding: 12px; border-radius: 8px; font-weight: bold; color: #006c35; margin: 15px 0; }
-        .modal-content button { background: #004d25; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.05rem; }
-        .modal-content button.btn-close { background: #888; margin-top: 8px; width: auto; font-size: 0.9rem; }
-        
-        .loader-spinner { border: 4px solid #f3f3f3; border-top: 4px solid #006c35; border-radius: 50%; width: 45px; height: 45px; animation: spin 0.9s linear infinite; margin: 20px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .modal-content p { font-size: 1.05rem; margin: 10px 0; color: #444; line-height: 1.5; }
+        .modal-content .shipping-time { background: #f0fff4; border: 1px solid #006c35; padding: 12px; border-radius: 8px; font-weight: bold; color: #006c35; margin: 15px 0; }
+        .modal-content button { background: #004d25; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
         footer { text-align: center; padding: 20px; background: #003318; color: #fff; margin-top: 40px; }
     </style>
 </head>
 <body>
-
-    <!-- شاشة الترحيب -->
-    <div class="welcome-overlay">
-        <div class="welcome-title">مرحباً بك في شوبينج مود</div>
-        <div class="welcome-sub">عروض اليوم الوطني 🇸🇦</div>
-    </div>
-
     <div class="promo-banner">🇸🇦 عروض وباقات اليوم الوطني الـ 96 - شحن سريع لجميع المدن! 🇸🇦</div>
     <header>
         <h1>شوبنق مود | Shopping Mode 🇸🇦</h1>
@@ -98,7 +53,8 @@
         <a href="#perfumes">✨ العطور الفاخرة</a>
         <a href="#saudi-style">👔 الثياب والأشمغة</a>
         <a href="#vr">أجهزة VR</a>
-        <a href="#electronics">الإلكترونيات واللابتوبات</a>
+        <a href="#electronics">الإلكترونيات</a>
+        <a href="#toys">الألعاب</a>
     </nav>
     <div class="container">
 
@@ -108,11 +64,11 @@
             <div class="card">
                 <span class="badge">وفر أكتر 🔥</span>
                 <span class="badge-nd">اليوم الوطني 96</span>
-                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=400&q=80" alt="عرض تيشيرت بديدس وملصقات">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=400&q=80" alt="عرض تيشيرت وملصقات">
                 <h3>باقة الشباب (تيشيرت بديدس + ملصقات)</h3>
                 <p class="desc">تيشيرت بديدس رياضي خفيف + حزمة ملصقات متنوعة بخصم خاص</p>
                 <div class="price">49 ر.س <small style="text-decoration:line-through; color:#888; font-size:0.85rem;">55 ر.س</small></div>
-                <button class="btn-add" onclick="addToCart('باقة تيشيرت بديدس + ملصقات', 49, 'saudi')">إضافة العرض للسلة 🛒</button>
+                <button class="btn-add" onclick="addToCart('باقة تيشيرت + ملصقات', 49, 'saudi')">إضافة العرض للسلة 🛒</button>
             </div>
             <div class="card">
                 <span class="badge">العرض الفاخر ⭐</span>
@@ -200,51 +156,38 @@
             </div>
         </div>
 
-        <!-- قسم الإلكترونيات واللابتوبات -->
-        <h2 id="electronics" class="section-title">📱 الإلكترونيات واللابتوبات</h2>
+        <!-- قسم الألعاب والإلكترونيات -->
+        <h2 id="electronics" class="section-title">📱 الإلكترونيات والألعاب</h2>
         <div class="products-grid">
             <div class="card">
-                <span class="badge">الأكثر طلباً 💻</span>
-                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="لابتوب المحترفين Pro">
-                <h3>لابتوب المحترفين (Laptop Pro)</h3>
-                <p class="desc">أداء عالي وسريع للعمل والدراسة والألعاب بأحدث المواصفات</p>
-                <div class="price">2,999 ر.س</div>
-                <button class="btn-add" onclick="addToCart('لابتوب المحترفين Pro', 2999, 'usa')">إضافة للسلة 🛒</button>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="جوال باي فون 17">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="باي فون 17">
                 <h3>جوال باي فون 17 (PayPhone 17)</h3>
-                <p class="desc">شاشة فائقة السرعة مع كاميرا احترافية وتصميم عصري</p>
                 <div class="price">2,499 ر.س</div>
                 <button class="btn-add" onclick="addToCart('باي فون 17', 2499, 'china')">إضافة للسلة 🛒</button>
             </div>
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=400&q=80" alt="سماعة بلوتوث بيضاء">
-                <h3>سماعة بلوتوث لاسلكية (بيضاء)</h3>
-                <p class="desc">صوت نقي مع خاصية عزل الضوضاء وعمر بطارية طويل</p>
-                <div class="price">120 ر.س</div>
-                <button class="btn-add" onclick="addToCart('سماعة بلوتوث بيضاء', 120, 'china')">إضافة للسلة 🛒</button>
+                <img src="https://images.unsplash.com/photo-1532330393533-443990a51d10?auto=format&fit=crop&w=400&q=80" alt="سيارة لعبة ربع بريموت">
+                <h3>سيارة لعبة ربع بريموت تحكم</h3>
+                <div class="price">85 ر.س</div>
+                <button class="btn-add" onclick="addToCart('سيارة ربع ريموت', 85, 'china')">إضافة للسلة 🛒</button>
             </div>
         </div>
 
     </div>
 
-    <!-- خدمة العملاء -->
-    <div class="support-float">
-        <a href="https://wa.me/966550140855" target="_blank" class="support-btn">💬 واتساب</a>
-        <a href="tel:0550140855" class="support-btn call-btn">📞 اتصال</a>
-    </div>
-
-    <!-- شريط السلة السفلي -->
     <div class="cart-bar">
         <div class="cart-info">🛒 السلة: <span id="cart-count">0</span> منتج | المجموع: <span id="cart-total">0</span> ر.س</div>
-        <button class="checkout-btn" onclick="openCartModal()">عرض السلة 🛒</button>
+        <button class="checkout-btn" onclick="checkout()">إتمام الشراء المباشر ⚡</button>
     </div>
 
-    <!-- نافذة عرض السلة والدفع -->
     <div class="modal" id="checkout-modal">
-        <div class="modal-content" id="modal-box-content">
-            <!-- سيتم توليد محتويات السلة والدفع والأنيميشن هنا عبر JavaScript -->
+        <div class="modal-content">
+            <h2>🎉 تم تأكيد طلبك بنجاح!</h2>
+            <p>طريقة الدفع: <b>الدفع المباشر عند الاستلام ⚡</b></p>
+            <div class="shipping-time" id="shipping-time-text">جاري حساب مدة الشحن...</div>
+            <p>شكراً لتسوقك من متجر شوبنق مود 🇸🇦</p>
+            <br>
+            <button onclick="closeModal()">إغلاق</button>
         </div>
     </div>
 
@@ -252,38 +195,14 @@
 
     <script>
         let cart = [];
-
-        function addToCart(name, price, origin) { 
-            cart.push({ name, price, origin }); 
-            updateCartUI(); 
-        }
-
+        function addToCart(name, price, origin) { cart.push({ name, price, origin }); updateCartUI(); }
         function updateCartUI() {
             document.getElementById('cart-count').innerText = cart.length;
             let total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total').innerText = total;
         }
-
-        function openCartModal() {
-            if (cart.length === 0) { 
-                alert('السلة فارغة! قم بفرز وإضافة بعض المنتجات أولاً.'); 
-                return; 
-            }
-            renderCartModal();
-            document.getElementById('checkout-modal').style.display = 'flex';
-        }
-
-        function renderCartModal() {
-            let containerHtml = '';
-            cart.forEach((item, index) => {
-                containerHtml += `
-                    <div class="cart-item-row">
-                        <span><b>${index + 1}.</b> ${item.name}</span>
-                        <span><b>${item.price} ر.س</b></span>
-                    </div>
-                `;
-            });
-
+        function checkout() {
+            if (cart.length === 0) { alert('السلة فارغة! قم بفرز وإضافة بعض المنتجات أولاً.'); return; }
             let shippingText = "";
             if (cart.length >= 5) {
                 shippingText = "📦 طلبية كبيرة متجهة لعنوانك.<br><b>مدة التوصيل المتوقعة: شهر كامل (30 يوماً).</b>";
@@ -298,26 +217,10 @@
                     shippingText = "🚢 الشحن مباشر وسريع.<br><b>مدة التوصيل المتوقعة: من 3 إلى 5 أيام.</b>";
                 }
             }
-
-            document.getElementById('modal-box-content').innerHTML = `
-                <h2>🛒 محتويات السلة</h2>
-                <div class="cart-items-list">
-                    ${containerHtml}
-                </div>
-
-                <div class="payment-section">
-                    <p><b>اختر طريقة الدفع:</b></p>
-                    <label>
-                        <input type="radio" name="paymentMethod" value="cod" checked onclick="toggleCardInputs('cod')"> الدفع عند الاستلام 💵
-                    </label>
-                    <label>
-                        <input type="radio" name="paymentMethod" value="card" onclick="toggleCardInputs('card')"> الدفع هنا (بالبطاقة) 💳
-                    </label>
-
-                    <div class="card-box" id="card-box-inputs">
-                        <input type="text" id="card-number" placeholder="رقم البطاقة (أدخل 9 أرقام بالضبط)" maxlength="9">
-                        <input type="text" id="card-cvv" placeholder="رمز الأمان CVV (أدخل 3 أو 4 أرقام)" maxlength="4">
-                    </div>
-                </div>
-
-                <div class="shipping-time">${shippingTex
+            document.getElementById('shipping-time-text').innerHTML = shippingText;
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+        function closeModal() { document.getElementById('checkout-modal').style.display = 'none'; cart = []; updateCartUI(); }
+    </script>
+</body>
+</html>
