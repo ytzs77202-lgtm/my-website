@@ -75,11 +75,21 @@
         .cart-bar .checkout-btn { background: #f1c40f; color: #003318; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; }
         .cart-bar .checkout-btn:hover { background: #e1b40f; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000; }
-        .modal-content { background: white; padding: 25px; border-radius: 12px; max-width: 450px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .modal-content h2 { color: #006c35; margin-bottom: 10px; }
-        .modal-content p { font-size: 1.05rem; margin: 10px 0; color: #444; line-height: 1.5; }
-        .modal-content .shipping-time { background: #f0fff4; border: 1px solid #006c35; padding: 12px; border-radius: 8px; font-weight: bold; color: #006c35; margin: 15px 0; }
-        .modal-content button { background: #004d25; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .modal-content { background: white; padding: 25px; border-radius: 12px; max-width: 450px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
+        .modal-content h2 { color: #006c35; margin-bottom: 15px; }
+        .modal-content p { font-size: 1rem; margin: 10px 0; color: #444; line-height: 1.5; }
+        .cart-items-list { text-align: right; background: #f9f9f9; padding: 10px; border-radius: 8px; margin: 15px 0; max-height: 180px; overflow-y: auto; border: 1px solid #ddd; }
+        .cart-item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        .payment-options { text-align: right; margin: 15px 0; }
+        .payment-options label { display: block; margin: 8px 0; font-weight: bold; cursor: pointer; }
+        .card-inputs { background: #f0fff4; padding: 12px; border-radius: 8px; border: 1px solid #006c35; margin-top: 10px; display: none; }
+        .card-inputs input { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #ccc; border-radius: 6px; text-align: center; font-size: 1rem; }
+        .shipping-time { background: #eef7f2; border: 1px solid #006c35; padding: 12px; border-radius: 8px; font-weight: bold; color: #006c35; margin: 15px 0; }
+        .btn-action { background: #004d25; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.05rem; margin-top: 10px; }
+        .btn-action:hover { background: #003318; }
+        .btn-close { background: #888; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+        .loader-spinner { border: 4px solid #f3f3f3; border-top: 4px solid #006c35; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         footer { text-align: center; padding: 20px; background: #003318; color: #fff; margin-top: 40px; }
     </style>
 </head>
@@ -101,6 +111,7 @@
     <nav>
         <a href="#">الرئيسية</a>
         <a href="#bundles">💥 باقات اليوم الوطني</a>
+        <a href="#new-collection">👕 تشكيلة الملابس الجديدة</a>
         <a href="#perfumes">✨ العطور الفاخرة</a>
         <a href="#saudi-style">👔 الثياب والأشمغة</a>
         <a href="#vr">أجهزة VR</a>
@@ -149,6 +160,27 @@
             </div>
         </div>
 
+        <!-- القائمة الجديدة: تشكيلة الملابس الجديدة -->
+        <h2 id="new-collection" class="section-title">👕 تشكيلة الملابس الجديدة</h2>
+        <div class="products-grid">
+            <div class="card">
+                <span class="badge">وصل حديثاً 🔥</span>
+                <img src="1778166141346.png" alt="وصل خضران">
+                <h3>وصل خضران</h3>
+                <p class="desc">تصميم عصري وجديد كلياً متاح الآن لفترة محدودة</p>
+                <div class="price">130 ر.س</div>
+                <button class="btn-add" onclick="addToCart('وصل خضران', 130, 'saudi')">إضافة للسلة 🛒</button>
+            </div>
+            <div class="card">
+                <span class="badge">جديد 🌟</span>
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=400&q=80" alt="تيشيرت مناسب لك انت وصديقك">
+                <h3>تيشيرت مناسب لك انت وصديقك</h3>
+                <p class="desc">تصميم عصري وجذاب ومناسب للإهداء لك ولصديقك المقرب</p>
+                <div class="price">120 ر.س</div>
+                <button class="btn-add" onclick="addToCart('تيشيرت مناسب لك ولصديقك', 120, 'saudi')">اشتر الان 🛒</button>
+            </div>
+        </div>
+
         <!-- قسم العطور -->
         <h2 id="perfumes" class="section-title">✨ قسم العطور الفاخرة</h2>
         <div class="products-grid">
@@ -176,17 +208,9 @@
             </div>
         </div>
 
-        <!-- قسم الزي السعودي والملابس -->
-        <h2 id="saudi-style" class="section-title">👔 الزي السعودي والملابس الأنيقة</h2>
+        <!-- قسم الزي السعودي والأشمغة -->
+        <h2 id="saudi-style" class="section-title">👔 الزي السعودي والأشمغة</h2>
         <div class="products-grid">
-            <div class="card">
-                <span class="badge">جديد 🌟</span>
-                <img src="1778166141346.png" alt="تيشيرت مميز">
-                <h3>تيشيرت مناسب لك انت وصديقك</h3>
-                <p class="desc">تصميم عصري وجذاب ومناسب للإهداء لك ولصديقك المقرب</p>
-                <div class="price">120 ر.س</div>
-                <button class="btn-add" onclick="addToCart('تيشيرت مناسب لك ولصديقك', 120, 'saudi')">اشتر الان 🛒</button>
-            </div>
             <div class="card">
                 <img src="IMG_9a9ecd9d-cf2c-4555-bbf6-21c8e68d25d9.jpg" alt="ثوب سعودي أبيض">
                 <h3>ثوب سعودي فاخر (أبيض)</h3>
@@ -250,19 +274,37 @@
 
     </div>
 
+    <!-- شريط السلة السفلي -->
     <div class="cart-bar">
         <div class="cart-info">🛒 السلة: <span id="cart-count">0</span> منتج | المجموع: <span id="cart-total">0</span> ر.س</div>
-        <button class="checkout-btn" onclick="checkout()">إتمام الشراء المباشر ⚡</button>
+        <button class="checkout-btn" onclick="openCartModal()">عرض السلة 🛒</button>
     </div>
 
-    <div class="modal" id="checkout-modal">
-        <div class="modal-content">
-            <h2>🎉 تم تأكيد طلبك بنجاح!</h2>
-            <p>طريقة الدفع: <b>الدفع المباشر عند الاستلام ⚡</b></p>
-            <div class="shipping-time" id="shipping-time-text">جاري حساب مدة الشحن...</div>
-            <p>شكراً لتسوقك من متجر شوبنق مود 🇸🇦</p>
-            <br>
-            <button onclick="closeModal()">إغلاق</button>
+    <!-- نافذة مراجعة السلة والدفع -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content" id="cart-modal-body">
+            <h2>🛒 محتويات السلة</h2>
+            <div class="cart-items-list" id="cart-items-container">
+                <!-- المشتريات تظهر هنا -->
+            </div>
+            
+            <div class="payment-options">
+                <p><b>اختر طريقة الدفع:</b></p>
+                <label>
+                    <input type="radio" name="paymentMethod" value="cod" checked onclick="togglePaymentInputs('cod')"> الدفع عند الاستلام 💵
+                </label>
+                <label>
+                    <input type="radio" name="paymentMethod" value="card" onclick="togglePaymentInputs('card')"> البطاقة البنكية 💳
+                </label>
+
+                <div class="card-inputs" id="card-inputs-box">
+                    <input type="text" id="card-number" placeholder="رقم البطاقة (أدخل 9 أرقام)" maxlength="9">
+                    <input type="text" id="card-cvv" placeholder="رمز الأمان CVV (أدخل 4 أرقام)" maxlength="4">
+                </div>
+            </div>
+
+            <button class="btn-action" onclick="processOrder()">إتمام الطلب ⚡</button>
+            <button class="btn-close" onclick="closeCartModal()">إغلاق</button>
         </div>
     </div>
 
@@ -270,33 +312,16 @@
 
     <script>
         let cart = [];
-        function addToCart(name, price, origin) { cart.push({ name, price, origin }); updateCartUI(); }
+
+        function addToCart(name, price, origin) {
+            cart.push({ name, price, origin });
+            updateCartUI();
+        }
+
         function updateCartUI() {
             document.getElementById('cart-count').innerText = cart.length;
             let total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total').innerText = total;
         }
-        function checkout() {
-            if (cart.length === 0) { alert('السلة فارغة! قم بفرز وإضافة بعض المنتجات أولاً.'); return; }
-            let shippingText = "";
-            if (cart.length >= 5) {
-                shippingText = "📦 طلبية كبيرة متجهة لعنوانك.<br><b>مدة التوصيل المتوقعة: شهر كامل (30 يوماً).</b>";
-            } else {
-                let hasUSA = cart.some(item => item.origin === 'usa');
-                let hasChina = cart.some(item => item.origin === 'china');
-                if (hasUSA && hasChina) {
-                    shippingText = "✈️ شحن دولي مجمع لعنوانك.<br><b>مدة التوصيل المتوقعة: من 8 إلى 14 يوماً.</b>";
-                } else if (hasUSA) {
-                    shippingText = "✈️ الشحن مباشر من أمريكا.<br><b>مدة التوصيل المتوقعة: من 6 إلى 10 أيام.</b>";
-                } else {
-                    shippingText = "🚢 الشحن مباشر وسريع.<br><b>مدة التوصيل المتوقعة: من 3 إلى 5 أيام.</b>";
-                }
-            }
-            document.getElementById('shipping-time-text').innerHTML = shippingText;
-            document.getElementById('checkout-modal').style.display = 'flex';
-        }
-        function closeModal() { document.getElementById('checkout-modal').style.display = 'none'; cart = []; updateCartUI(); }
-    </script>
-</body>
-            </html>
-            
+
+        function openCartModal(
